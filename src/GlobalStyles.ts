@@ -12,7 +12,7 @@ body{
     font-family: "Space Mono", monospace;
     max-width: 100%;
     min-height: 100vh;
-    background-color: #f6f8ff;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
