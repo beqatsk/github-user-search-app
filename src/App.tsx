@@ -12,6 +12,14 @@ function App() {
       repos: 8,
       followers: 3938,
       following: 9,
+      pin: "/images/pin.png",
+      pinTitle: "San Francisco",
+      link: "/images/url.png",
+      linkTitle: "https://github.blog",
+      twitter: "/images/twitter.png",
+      twiterTitle: "Not Available",
+      office: "/images/office-building.png",
+      officeTitle: "@github",
     },
   ];
   return (
@@ -55,6 +63,22 @@ function App() {
                   <ReposCount>{item.following}</ReposCount>
                 </ActiveWrapper>
               </ActiveCard>
+              <AboutUser>
+                <img src={item.pin} alt="pinImage" />
+                <Pin>{item.pinTitle}</Pin>
+              </AboutUser>
+              <AboutUser>
+                <img src={item.link} alt="linkImage" />
+                <Pin>{item.linkTitle}</Pin>
+              </AboutUser>
+              <AboutUser>
+                <img src={item.twitter} alt="twitterImage" />
+                <Pin>{item.twiterTitle}</Pin>
+              </AboutUser>
+              <AboutUser>
+                <img src={item.office} alt="officeImage" />
+                <Pin>{item.officeTitle}</Pin>
+              </AboutUser>
             </UserContainer>
           );
         })}
@@ -64,7 +88,7 @@ function App() {
 }
 const Container = styled.div`
   width: 375px;
-  padding: 31px 24px 79px;
+  padding: 31px 24px;
   background-color: #f6f8ff;
 `;
 const HeaderWrapper = styled.div`
@@ -199,6 +223,18 @@ const ReposCount = styled.h2`
   font-size: 16px;
   font-weight: bold;
   color: #2b3442;
+`;
+const AboutUser = styled.div`
+  display: flex;
+  justify-content: start;
+  gap: 20px;
+  align-items: center;
+  margin-top: 17px;
+`;
+const Pin = styled.h2`
+  font-size: 13px;
+  font-weight: 400;
+  color: #4b6a9b;
 `;
 
 export default App;
