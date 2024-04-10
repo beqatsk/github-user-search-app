@@ -1,17 +1,30 @@
 import styled from "styled-components";
-function Header() {
+
+function Header({
+  background,
+  setBackground,
+}: {
+  background: boolean;
+  setBackground: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const handleClick = () => {
+    setBackground(!background);
+  };
   return (
     <>
       <HeaderWrapper>
-        <HeaderH1>devfinder</HeaderH1>
+        <HeaderH1 background={background}>devfinder</HeaderH1>
         <HeaderTitle>
           <HeaderTitleH2>DARK</HeaderTitleH2>
-          <HeaderTitleImg></HeaderTitleImg>
+          <HeaderTitleImg background={background} onClick={handleClick} />
         </HeaderTitle>
       </HeaderWrapper>
       <InputWrapper>
         <SearchImage></SearchImage>
-        <Input placeholder="Search GitHub username…"></Input>
+        <Input
+          placeholder="Search GitHub username…"
+          background={background}
+        ></Input>
         <SearchButton>Search</SearchButton>
       </InputWrapper>
     </>
@@ -24,10 +37,10 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const HeaderH1 = styled.h1`
+const HeaderH1 = styled.h1<{ background: boolean }>`
   font-size: 26px;
   font-weight: 700;
-  color: #222731;
+  color: ${(props) => (props.background ? "white" : "#222731")};
 `;
 const HeaderTitle = styled.div`
   display: flex;
@@ -41,8 +54,9 @@ const HeaderTitleH2 = styled.h2`
   letter-spacing: 2.5px;
   color: #4b6a9b;
 `;
-const HeaderTitleImg = styled.div`
-  background-image: url(/images/moon.png);
+const HeaderTitleImg = styled.div<{ background: boolean }>`
+  background-image: ${(props) =>
+    props.background ? `url(/images/sun.png)` : `url(/images/moon.png)`};
   width: 20px;
   height: 20px;
   background-position: center;
@@ -60,7 +74,7 @@ const SearchImage = styled.div`
   left: 10px;
   top: 40px;
 `;
-const Input = styled.input`
+const Input = styled.input<{ background: boolean }>`
   width: 100%;
   height: 60px;
   font-size: 18px;
@@ -69,11 +83,12 @@ const Input = styled.input`
   padding: 6.5px 7px 7.5px 35px;
   border-radius: 15px;
   margin-top: 20px;
+  background-color: ${(props) => (props.background ? "#1e2a47" : "#fefefe")};
   &::placeholder {
     font-size: 13px;
     font-weight: normal;
     line-height: 1.92;
-    color: #4b6a9b;
+    color: ${(props) => (props.background ? "white" : "#4b6a9b")};
   }
 `;
 const SearchButton = styled.button`
