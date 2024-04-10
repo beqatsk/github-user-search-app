@@ -1,5 +1,5 @@
 import styled from "styled-components";
-function MainConatainer() {
+function MainConatainer({ background }: { background: boolean }) {
   const profile = [
     {
       id: 1,
@@ -11,13 +11,10 @@ function MainConatainer() {
       repos: 8,
       followers: 3938,
       following: 9,
-      pin: "/images/pin.png",
       pinTitle: "San Francisco",
-      link: "/images/url.png",
       linkTitle: "https://github.blog",
       twitter: "/images/twitter.png",
       twiterTitle: "Not Available",
-      office: "/images/office-building.png",
       officeTitle: "@github",
     },
   ];
@@ -25,44 +22,64 @@ function MainConatainer() {
     <>
       {profile.map((item) => {
         return (
-          <UserContainer key={item.id}>
+          <UserContainer key={item.id} background={background}>
             <UserTitle>
               <img src={item.url} alt="userimg" />
               <UserInfo>
-                <UserName>{item.name}</UserName>
-                <UserData>{item.date}</UserData>
+                <UserName background={background}>{item.name}</UserName>
+                <UserData background={background}>{item.date}</UserData>
               </UserInfo>
             </UserTitle>
-            <UserText>{item.title}</UserText>
-            <ActiveCard>
+            <UserText background={background}>{item.title}</UserText>
+            <ActiveCard background={background}>
               <ActiveWrapper>
-                <Repos>Repos</Repos>
-                <ReposCount>{item.repos}</ReposCount>
+                <Repos background={background}>Repos</Repos>
+                <ReposCount background={background}>{item.repos}</ReposCount>
               </ActiveWrapper>
               <ActiveWrapper>
-                <Repos>Followers</Repos>
-                <ReposCount>{item.followers}</ReposCount>
+                <Repos background={background}>Followers</Repos>
+                <ReposCount background={background}>
+                  {item.followers}
+                </ReposCount>
               </ActiveWrapper>
               <ActiveWrapper>
-                <Repos>Following</Repos>
-                <ReposCount>{item.following}</ReposCount>
+                <Repos background={background}>Following</Repos>
+                <ReposCount background={background}>
+                  {item.following}
+                </ReposCount>
               </ActiveWrapper>
             </ActiveCard>
             <AboutUser>
-              <img src={item.pin} alt="pinImage" />
-              <Pin>{item.pinTitle}</Pin>
+              <img
+                src={background ? "/images/pin-white.png" : "/images/pin.png"}
+                alt="pinImage"
+              />
+              <Pin background={background}>{item.pinTitle}</Pin>
             </AboutUser>
             <AboutUser>
-              <img src={item.link} alt="linkImage" />
-              <Pin>{item.linkTitle}</Pin>
+              <img
+                src={background ? "/images/url-white.png" : "/images/url.png"}
+                alt="linkImage"
+              />
+              <Pin background={background}>{item.linkTitle}</Pin>
             </AboutUser>
             <AboutUser>
               <img src={item.twitter} alt="twitterImage" />
-              <Pin>{item.twiterTitle}</Pin>
+              <TwiterText background={background}>
+                {item.twiterTitle}
+              </TwiterText>
+              {/* <Pin background={background}>{item.twiterTitle}</Pin> */}
             </AboutUser>
             <AboutUser>
-              <img src={item.office} alt="officeImage" />
-              <Pin>{item.officeTitle}</Pin>
+              <img
+                src={
+                  background
+                    ? "/images/office-building-white.png"
+                    : "/images/office-building.png"
+                }
+                alt="officeImage"
+              />
+              <Pin background={background}>{item.officeTitle}</Pin>
             </AboutUser>
           </UserContainer>
         );
@@ -72,13 +89,13 @@ function MainConatainer() {
 }
 export default MainConatainer;
 
-const UserContainer = styled.div`
+const UserContainer = styled.div<{ background: boolean }>`
   width: 327px;
   padding: 32px 24px 48px;
   border-radius: 15px;
   margin: 16px 0 0;
   box-shadow: 0 16px 30px -10px rgba(70, 96, 187, 0.2);
-  background-color: #fefefe;
+  background-color: ${(props) => (props.background ? "#1e2a47" : "#fefefe")};
 `;
 const UserTitle = styled.div`
   display: flex;
@@ -90,29 +107,29 @@ const UserInfo = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
-const UserName = styled.h2`
+const UserName = styled.h2<{ background: boolean }>`
   font-size: 16px;
   font-weight: 700;
-  color: #2b3442;
+  color: ${(props) => (props.background ? "white" : "#2b3442")};
 `;
-const UserData = styled.span`
+const UserData = styled.span<{ background: boolean }>`
   font-size: 13px;
   font-weight: 400;
-  color: #697c9a;
+  color: ${(props) => (props.background ? "white" : "#697c9a")};
 `;
-const UserText = styled.p`
+const UserText = styled.p<{ background: boolean }>`
   font-size: 13px;
   font-weight: 400;
-  color: #4b6a9b;
+  color: ${(props) => (props.background ? "white" : "#4b6a9b")};
   line-height: 1.92;
   margin: 33px 0 23px;
 `;
-const ActiveCard = styled.h3`
+const ActiveCard = styled.h3<{ background: boolean }>`
   width: 279px;
   margin: 23px 0 24px;
   padding: 18px 14px 19px 15px;
   border-radius: 10px;
-  background-color: #f6f8ff;
+  background-color: ${(props) => (props.background ? "#141d2f" : "#f6f8ff")};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -123,15 +140,15 @@ const ActiveWrapper = styled.div`
   gap: 8px;
   align-items: center;
 `;
-const Repos = styled.h2`
+const Repos = styled.h2<{ background: boolean }>`
   font-size: 11px;
   font-weight: 400;
-  color: #4b6a9b;
+  color: ${(props) => (props.background ? "white" : "#4b6a9b")};
 `;
-const ReposCount = styled.h2`
+const ReposCount = styled.h2<{ background: boolean }>`
   font-size: 16px;
   font-weight: bold;
-  color: #2b3442;
+  color: ${(props) => (props.background ? "white" : "#4b6a9b")};
 `;
 const AboutUser = styled.div`
   display: flex;
@@ -140,8 +157,11 @@ const AboutUser = styled.div`
   align-items: center;
   margin-top: 17px;
 `;
-const Pin = styled.h2`
+const Pin = styled.h2<{ background: boolean }>`
   font-size: 13px;
   font-weight: 400;
+  color: ${(props) => (props.background ? "white" : "#4b6a9b")};
+`;
+const TwiterText = styled(Pin)`
   color: #4b6a9b;
 `;

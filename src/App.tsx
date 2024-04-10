@@ -8,7 +8,7 @@ function App() {
     <>
       <Container background={background}>
         <Header background={background} setBackground={setBackground} />
-        <MainConatainer />
+        <MainConatainer background={background} />
       </Container>
     </>
   );
