@@ -1,5 +1,5 @@
 import styled from "styled-components";
-function MainConatainer({ background }: { background: boolean }) {
+function MainContainer({ background }: { background: boolean }) {
   const profile = [
     {
       id: 1,
@@ -87,7 +87,7 @@ function MainConatainer({ background }: { background: boolean }) {
     </>
   );
 }
-export default MainConatainer;
+export default MainContainer;
 
 const UserContainer = styled.div<{ background: boolean }>`
   width: 327px;

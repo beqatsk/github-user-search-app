@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import Header from "./componnets/Header";
-import MainConatainer from "./componnets/MainConatiner";
+import MainConatainer from "./componnets/MainContainer";
 function App() {
   const [background, setBackground] = useState<boolean>(false);
   return (

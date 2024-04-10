@@ -15,7 +15,9 @@ function Header({
       <HeaderWrapper>
         <HeaderH1 background={background}>devfinder</HeaderH1>
         <HeaderTitle>
-          <HeaderTitleH2>DARK</HeaderTitleH2>
+          <HeaderTitleH2 background={background}>
+            {background ? "LIGHT" : "DARK"}
+          </HeaderTitleH2>
           <HeaderTitleImg background={background} onClick={handleClick} />
         </HeaderTitle>
       </HeaderWrapper>
@@ -48,11 +50,11 @@ const HeaderTitle = styled.div`
   align-items: center;
   gap: 16px;
 `;
-const HeaderTitleH2 = styled.h2`
+const HeaderTitleH2 = styled.h2<{ background: boolean }>`
   font-size: 13px;
   font-weight: bold;
   letter-spacing: 2.5px;
-  color: #4b6a9b;
+  color: ${(props) => (props.background ? "white" : "#4b6a9b")};
 `;
 const HeaderTitleImg = styled.div<{ background: boolean }>`
   background-image: ${(props) =>
