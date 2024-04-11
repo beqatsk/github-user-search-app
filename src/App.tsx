@@ -6,6 +6,7 @@ import User from "./types/user";
 function App() {
   const [background, setBackground] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
+  const [status, setStatus] = useState<number>(200);
   const [userName, setUserName] = useState<string>("octocat");
   const handleClick = () => {
     setBackground(!background);
@@ -14,9 +15,14 @@ function App() {
     getUser();
   }, []);
   const getUser = async () => {
-    const response = await fetch(`https://api.github.com/users/${userName}`);
-    const data = await response.json();
-    setUser(data);
+    try {
+      const response = await fetch(`https://api.github.com/users/${userName}`);
+      const data = await response.json();
+      setUser(data);
+      setStatus(response.status);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>
@@ -39,6 +45,7 @@ function App() {
             onChange={(event) => setUserName(event.target.value)}
           ></Input>
           <SearchButton onClick={getUser}>Search</SearchButton>
+          {status !== 200 && <p style={{ color: "red" }}>Not Found</p>}
         </InputWrapper>
         {/* <Header
           background={background}
