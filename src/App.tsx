@@ -6,16 +6,12 @@ import User from "./types/user";
 function App() {
   const [background, setBackground] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
-  const [userName, setUserName] = useState<string>("");
+  const [userName, setUserName] = useState<string>("octocat");
   const handleClick = () => {
     setBackground(!background);
   };
   useEffect(() => {
-    (async () => {
-      const response = await fetch("https://api.github.com/users/beqatsk");
-      const data = await response.json();
-      setUser(data);
-    })();
+    getUser();
   }, []);
   const getUser = async () => {
     const response = await fetch(`https://api.github.com/users/${userName}`);
@@ -37,6 +33,7 @@ function App() {
         <InputWrapper>
           <SearchImage></SearchImage>
           <Input
+            value={userName}
             placeholder="Search GitHub username…"
             background={background}
             onChange={(event) => setUserName(event.target.value)}
@@ -63,7 +60,7 @@ function App() {
               <UserData background={background}>{user?.created_at}</UserData>
             </UserInfo>
           </UserTitle>
-          <UserText background={background}>{}</UserText>
+          <UserText background={background}>{user?.bio}</UserText>
           <ActiveCard background={background}>
             <ActiveWrapper>
               <Repos background={background}>Repos</Repos>
