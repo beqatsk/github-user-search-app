@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-// import Header from "./componnets/Header";
-// import MainConatainer from "./componnets/MainContainer";
 import User from "./types/user";
 function App() {
   const [background, setBackground] = useState<boolean>(false);
@@ -47,13 +45,6 @@ function App() {
           <SearchButton onClick={getUser}>Search</SearchButton>
           {status !== 200 && <p style={{ color: "red" }}>Not Found</p>}
         </InputWrapper>
-        {/* <Header
-          background={background}
-          setBackground={setBackground}
-          user={user}
-          setUser={setUser}
-        />
-        <MainConatainer background={background} /> */}
 
         <UserContainer background={background}>
           <UserTitle>
